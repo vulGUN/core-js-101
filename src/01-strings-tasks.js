@@ -236,6 +236,7 @@ function encodeToRot13(/* str */) {
  *   isString(new String('test')) => true
  */
 function isString(/* value */) {
+  // return typeof value === 'string';
   throw new Error('Not implemented');
 }
 
