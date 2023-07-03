@@ -198,8 +198,28 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  let result = '';
+  for (let i = 0; i < height; i += 1) {
+    for (let j = 0; j < width; j += 1) {
+      if (i === 0 && j === 0) {
+        result += '┌';
+      } else if (i === 0 && j === width - 1) {
+        result += '┐\n';
+      } else if (i === height - 1 && j === 0) {
+        result += '└';
+      } else if (i === height - 1 && j === width - 1) {
+        result += '┘\n';
+      } else if (i === 0 || i === height - 1) {
+        result += '─';
+      } else if (j === 0 || j === width - 1) {
+        result += '│';
+      } else {
+        result += ' ';
+      }
+    }
+  }
+  return result;
 }
 
 /**
@@ -218,8 +238,17 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const alp = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const alp2 = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+
+  return str
+    .split('')
+    .map((item) => {
+      if (alp.includes(item)) return alp2[alp.indexOf(item)];
+      return item;
+    })
+    .join('');
 }
 
 /**
@@ -235,9 +264,8 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  // return typeof value === 'string';
-  throw new Error('Not implemented');
+function isString(value) {
+  return typeof value === 'string' || value instanceof String;
 }
 
 /**
